@@ -3,7 +3,7 @@ if ($_SERVER["REQUEST_METHOD"]== "POST")
 {
     $username = $_POST["username"];
     $password = $_POST["password"];
-    $mail = $_Post["mail"];
+    $mail = $_POST["mail"];
 
     $valid_username = "user";
     $valid_password = "password";
