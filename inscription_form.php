@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -24,6 +24,10 @@
             background-color: blue;
             color: ghostwhite;
         }
+        button
+        {
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -44,16 +48,13 @@
     
     <u3>
         <h3> E-mail : </h3>
-        <form type="text" name="mail"></form>
+        <input type="text" name="mail"></input><br><br><br><br>
     </u3>
-    
-    <input>
-        <h3> Je m'inscris : </h3>
-        <input type="button" name="je m'inscris"></input>
+
+    <u4>
+        <button type="button" name="boutton-inscription">Je m'inscris</button>
         <h6> J'accepte les conditions d'utilisation et la politique de confidentialité : </h6>
-        <label for="oui">oui</label>
+        <label for="oui">oui :</label>
         <input type="checkbox" name="choice" id="oui"></input>
-        <label for="non">non</label>
-        <input type="checkbox" name="choise" id="non" ></input>
-    </input>
+    </u4>
 </body>
