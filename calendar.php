@@ -100,7 +100,7 @@
     </div>
 
     <script>
-        var currentYear = <?php echo $currentYear; ?>;
+        var currentYear = <?php echo $currentYear; ?>
         var currentMonth = <?php echo $currentMonth; ?>;
 
         function updateCalendar(year, month) {
