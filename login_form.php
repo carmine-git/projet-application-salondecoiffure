@@ -45,11 +45,11 @@
 </head>
 <body>
     <div class="login-container">
-        <h2>Login</h2>
+        <h2>Connexion</h2>
         <form action="login.php" method="POST">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <input type="submit" value="Login">
+            <input type="text" name="username" placeholder="Identifiant" required>
+            <input type="password" name="password" placeholder="Mot de passe" required>
+            <input type="submit" value="Se connecter">
         </form>
     </div>
 </body>
