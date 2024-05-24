@@ -29,7 +29,7 @@
         {
             text-align: center;
         }
-        img 
+        img
         {
             height: 30px;
             cursor: pointer;
@@ -66,7 +66,7 @@
                 {
                     document.getElementById("pass").setAttribute("type", "password");
                     document.getElementById("eye").src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQOqxAm4aOSdNH7YKYXgIwnyNd6fJhEJMf1R5GVOss4Ki18uijwNtfzex_NBgrg1owlGM&usqp=CAU";
-                    e=false;
+                    let e=false;
                 }
             }
         </script>
