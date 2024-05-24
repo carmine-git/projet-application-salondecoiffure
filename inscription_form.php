@@ -10,11 +10,13 @@
         body
         {
             font-family: Arial, Helvetica, sans-serif;
-            background-color: ghostwhite;
+            background-image: url("https://clipground.com/images/clipart-hair-design-5.jpg");
+            background-size: 40%;
+            background-repeat: no-repeat;
             max-width: 400px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #fff;
+            background-color: ghostwhite;
             border-radius: 5px;
             box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
             margin-top: 100px;
@@ -22,7 +24,7 @@
         header
         {
             text-align: center;
-            background-color: blue;
+            background-color: black;
             color: ghostwhite;
         }
         button
