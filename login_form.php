@@ -7,7 +7,9 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-image: url("https://clipground.com/images/clipart-hair-design-5.jpg");
+            background-size: 40%;
+            background-repeat: no-repeat;
         }
         .login-container {
             max-width: 400px;
