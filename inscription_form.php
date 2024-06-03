@@ -40,6 +40,7 @@
     </style>
 </head>
 
+<body>
 
     <header>
         <h1> Inscription </h1>
@@ -47,7 +48,7 @@
     <u1>
         <form action="inscription-from.php" method="POST"></form>
         <h3> Identifiant : </h3>
-        <input type="text" name="username"></input>
+        <input type="text" id="username" name="username"></input>
     </u1>
 
     <u2>

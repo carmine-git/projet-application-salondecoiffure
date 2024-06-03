@@ -15,6 +15,9 @@
                 border-radius: 5px;
                 box-shadow: 10px 10px 10px 10px rgba(0,0,0,0.1);
                 margin-top: 100px;
+                background-image: url("https://clipground.com/images/clipart-hair-design-5.jpg");
+                background-size: 40%;
+                background-repeat: no-repeat;
                 
             }
             
@@ -28,11 +31,6 @@
                 display: flex;
                 justify-content: center;
             }
-            u2
-            {
-                display: flex;
-                justify-content: left;
-            }
         </style>
     </head>
     
@@ -42,11 +40,9 @@
         </header>
         <u1>
             <button type="button" name="inscription">Inscription</button>
-            <button type="button" name="identification">Identification</button>
+            <button type="button" name="connexion">Connexion</button>
             <button type="button" name="calendrier">Calendrier</button>
+            <button type="button" name="contact">Contact</button><br><br>
         </u1>
-        <u2>
-            
-        </u2>
     </body>
 </html>
