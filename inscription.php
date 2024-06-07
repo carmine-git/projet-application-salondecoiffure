@@ -1,6 +1,7 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"]== "POST")
 {
+    var_dump($_POST);
     $username = $_POST["username"];
     $password = $_POST["password"];
     $mail = $_POST["mail"];
@@ -18,4 +19,5 @@ if ($_SERVER["REQUEST_METHOD"]== "POST")
     {
         echo "<script>alert('Invalid username or password or mail');</script>";
     }
+
 }

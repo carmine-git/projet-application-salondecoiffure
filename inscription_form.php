@@ -45,8 +45,8 @@
     <header>
         <h1> Inscription </h1>
     </header>
+    <form action="inscription.php" method="POST">
     <u1>
-        <form action="inscription-from.php" method="POST"></form>
         <h3> Identifiant : </h3>
         <input type="text" id="username" name="username"></input>
     </u1>
@@ -86,9 +86,10 @@
     </u3>
 
     <u4>
-        <button type="button" name="boutton-inscription">Je m'inscris</button>
+        <input type="submit" value="Je m'inscris"></input>
         <h6> J'accepte les conditions d'utilisation et la politique de confidentialité : </h6>
         <label for="oui">oui :</label>
         <input type="checkbox" name="choice" id="oui"></input>
     </u4>
+    </form>
 </body>
