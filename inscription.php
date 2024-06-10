@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"]== "POST")
     $password = $_POST["password"];
     $mail = $_POST["mail"];
 
-    $valid_username = "user";
+    /*$valid_username = "user";
     $valid_password = "password";
     $valid_mail = "mail";
 
@@ -18,6 +18,6 @@ if ($_SERVER["REQUEST_METHOD"]== "POST")
     else
     {
         echo "<script>alert('Invalid username or password or mail');</script>";
-    }
+    }*/
 
 }
