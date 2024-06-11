@@ -1,5 +1,5 @@
 <?php
-require_once "sql_init.php";
+require_once "mysqli.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nom = $_POST['nom'];
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "les mots de passe ne correspondent pas";
     }
 
-    $hashedPassword = password_hash($mdp, PASSWORD_DEFAULT);
+    $hashedPassword = hash('sha256', $mdp);
 
     try {
         $query = "INSERT INTO comptes_client (nom, prenom, email, mdp) VALUES (?, ?, ?, ?)";

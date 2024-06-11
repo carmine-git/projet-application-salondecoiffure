@@ -3,33 +3,75 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
     <title>Créer un utilisateur</title>
+    <link rel="stylesheet" href="inscription.css" />
   </head>
 
   <body>
-    <h1>Créer un utilisateur</h1>
-    <form action="inscription.php" method="post">
-      <label for="nom">Nom</label>
-      <input type="text" id="nom" name="nom" required /><br />
+    <div class="container">
+      <h1>Créer un utilisateur</h1>
+      <form action="inscription.php" method="post">
+        <label for="nom">Nom</label>
+        <input type="text" id="nom" name="nom" required />
 
-      <label for="prenom">Prenom</label>
-      <input type="text" id="prenom" name="prenom" required /><br />
+        <label for="prenom">Prénom</label>
+        <input type="text" id="prenom" name="prenom" required />
 
-      <label for="email">Email</label>
-      <input type="text" id="email" name="email" required /><br />
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" required />
 
-      <label for="mdp">Mot de passe</label>
-      <input type="password" id="mdp" name="mdp" required /><br />
+        <label for="mdp">Mot de passe</label>
+        <div class="password-container">
+          <input type="password" id="mdp" name="mdp" required />
+          <i
+            class="fas fa-eye-slash toggle-password"
+            onclick="togglePassword('mdp')"
+          ></i>
+        </div>
 
-      <label for="confirmemdp">Confirmer le mot de passe</label>
-      <input
-        type="password"
-        id="confirmemdp"
-        name="confirmemdp"
-        required
-      /><br />
+        <label for="confirmemdp">Confirmer le mot de passe</label>
+        <div class="password-container">
+          <input type="password" id="confirmemdp" name="confirmemdp" required />
+          <i
+            class="fas fa-eye-slash toggle-password"
+            onclick="togglePassword('confirmemdp')"
+          ></i>
+        </div>
 
-      <input type="submit" value="je m'inscrit" />
-    </form>
+        <div class="checkbox-container">
+          <input type="checkbox" id="rgpd" name="rgpd" />
+          <label for="rgpd"
+            >En cliquant ici, vous accepter notre politique concernant les
+            données confidentielles</label
+          >
+        </div>
+
+        <input type="submit" value="Je m'inscris" />
+      </form>
+    </div>
+
+    <script>
+      function togglePassword(id) {
+        const passwordField = document.getElementById(id);
+        const toggleIcon = passwordField.nextElementSibling;
+        if (passwordField.type === "password") {
+          passwordField.type = "text";
+          toggleIcon.classList.add("fa-eye");
+          toggleIcon.classList.remove("fa-eye-slash");
+        } else {
+          passwordField.type = "password";
+          toggleIcon.classList.add("fa-eye-slash");
+          toggleIcon.classList.remove("fa-eye");
+        }
+      }
+    </script>
   </body>
 </html>
