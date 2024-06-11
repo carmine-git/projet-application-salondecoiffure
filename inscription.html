@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Créer un utilisateur</title>
+  </head>
+
+  <body>
+    <h1>Créer un utilisateur</h1>
+    <form action="inscription.php" method="post">
+      <label for="nom">Nom</label>
+      <input type="text" id="nom" name="nom" required /><br />
+
+      <label for="prenom">Prenom</label>
+      <input type="text" id="prenom" name="prenom" required /><br />
+
+      <label for="email">Email</label>
+      <input type="text" id="email" name="email" required /><br />
+
+      <label for="mdp">Mot de passe</label>
+      <input type="password" id="mdp" name="mdp" required /><br />
+
+      <label for="confirmemdp">Confirmer le mot de passe</label>
+      <input
+        type="password"
+        id="confirmemdp"
+        name="confirmemdp"
+        required
+      /><br />
+
+      <input type="submit" value="je m'inscrit" />
+    </form>
+  </body>
+</html>
