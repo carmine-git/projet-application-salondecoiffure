@@ -15,13 +15,13 @@ function startOfWeek(date) {
 function getWeekRange(date) {
   const start = startOfWeek(date);
   const end = new Date(start);
-  end.setDate(start.getDate() + 6);
+  end.setDate(start.getDate() + 5); // Changed to 5 to include only up to Saturday
   return { start, end };
 }
 
 function formatDate(date) {
   const options = { year: "numeric", month: "2-digit", day: "2-digit" };
-  return date.toLocaleDateString("fr", options);
+  return date.toLocaleDateString("fr-FR", options);
 }
 
 function renderWeek() {
@@ -32,15 +32,22 @@ function renderWeek() {
 
   const weekDays = document.getElementById("weekDays");
   weekDays.innerHTML = "";
-  for (let i = 0; i < 7; i++) {
+  for (let i = 0; i < 6; i++) {
+    // Changed to 6 to iterate from Monday to Saturday
     const day = new Date(start);
     day.setDate(start.getDate() + i);
-    weekDays.innerHTML += `<div>${day.toDateString()}</div>`;
+    weekDays.innerHTML += `<div>${day.toLocaleDateString("fr-FR", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })}</div>`;
   }
 
   const timeSlots = document.getElementById("timeSlots");
   timeSlots.innerHTML = "";
-  for (let i = 0; i < 7; i++) {
+  for (let i = 0; i < 6; i++) {
+    // Changed to 6 to iterate from Monday to Saturday
     const day = new Date(start);
     day.setDate(start.getDate() + i);
     const dayStr = formatDate(day);
