@@ -1,3 +1,19 @@
+window.addEventListener("load", function () {
+  document.querySelectorAll(".time-slot.available").forEach((slot) => {
+    slot.addEventListener("click", () => {
+      if (
+        this.confirm(
+          `Voulez vous confirmer la réservation de la date ${slot.innerText}`
+        )
+      ) {
+        slot.classList.remove("available");
+        slot.classList.add("occupied");
+        slot.innerHTML += " (occupé)";
+      }
+    });
+  });
+});
+
 const appointments = [
   { date: "2024/05/27", time: "09:00", available: true },
   { date: "2024/05/30", time: "10:00", available: false },
@@ -15,7 +31,7 @@ function startOfWeek(date) {
 function getWeekRange(date) {
   const start = startOfWeek(date);
   const end = new Date(start);
-  end.setDate(start.getDate() + 5); // Changed to 5 to include only up to Saturday
+  end.setDate(start.getDate() + 5);
   return { start, end };
 }
 
@@ -33,7 +49,6 @@ function renderWeek() {
   const weekDays = document.getElementById("weekDays");
   weekDays.innerHTML = "";
   for (let i = 0; i < 6; i++) {
-    // Changed to 6 to iterate from Monday to Saturday
     const day = new Date(start);
     day.setDate(start.getDate() + i);
     weekDays.innerHTML += `<div>${day.toLocaleDateString("fr-FR", {
@@ -47,7 +62,6 @@ function renderWeek() {
   const timeSlots = document.getElementById("timeSlots");
   timeSlots.innerHTML = "";
   for (let i = 0; i < 6; i++) {
-    // Changed to 6 to iterate from Monday to Saturday
     const day = new Date(start);
     day.setDate(start.getDate() + i);
     const dayStr = formatDate(day);
