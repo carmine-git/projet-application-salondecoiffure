@@ -4,10 +4,8 @@ $db = 'test3';
 $user = 'root';
 $pass = 'YZ@pqqKfgCUTl&vVh@d&0#4W';
 
-// Create connection
 $conn = new mysqli($host, $user, $pass, $db);
 
-// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -18,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['appointment'])) {
     $appointmentTime = $appointmentData[1];
     $userEmail = 'test@example.com';
 
-    // Get the start date for the current week from the POST data or default to the initial week
     if (isset($_POST['weekStart'])) {
         $startDate = new DateTime($_POST['weekStart']);
     } else {
