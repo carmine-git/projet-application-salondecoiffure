@@ -22,11 +22,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if ($mdp === $hash) {
-        header("Location: acceuil.html");
+        header("Location: calendar.php");
     } else {
         echo 'Incorrect Password!';
     }
 } else {
-    header("Location: acceuil.html");
+    header("Location: calendar.php");
     exit;
 }

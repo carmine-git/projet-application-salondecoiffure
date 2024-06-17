@@ -1,16 +1,5 @@
 <?php
-$host = 'localhost';
-$db = 'test3';
-$user = 'root';
-$pass = 'YZ@pqqKfgCUTl&vVh@d&0#4W';
-
-$conn = new mysqli($host, $user, $pass, $db);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
+require_once "mysqli.php";
 
 if (isset($_POST['weekStart'])) {
     $startDate = new DateTime($_POST['weekStart']);
@@ -22,9 +11,9 @@ $endDate->modify('+5 days');
 $interval = new DateInterval('P1D');
 $dateRange = new DatePeriod($startDate, $interval, $endDate->add($interval));
 
-function isSlotBusy($date, $time, $conn)
+function isSlotBusy($date, $time, $connexion)
 {
-    $stmt = $conn->prepare("SELECT * FROM agenda WHERE date = ? AND heure_debut = ?");
+    $stmt = $connexion->prepare("SELECT * FROM agenda WHERE date = ? AND heure_debut = ?");
     $stmt->bind_param("ss", $date, $time);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -148,7 +137,7 @@ function isSlotBusy($date, $time, $conn)
                             <?php for ($hour = 9; $hour <= 17; $hour++) : ?>
                                 <?php $time = sprintf("%02d:00:00", $hour); ?>
                                 <div>
-                                    <?php if (isSlotBusy($date->format('Y-m-d'), $time, $conn)) : ?>
+                                    <?php if (isSlotBusy($date->format('Y-m-d'), $time, $connexion)) : ?>
                                         <button type="button" class="slot busy" disabled>Occupé</button>
                                     <?php else : ?>
                                         <button type="submit" name="appointment" value="<?php echo $date->format('Y-m-d') . ' ' . $time; ?>" class="slot available"><?php echo $hour . ':00'; ?></button>

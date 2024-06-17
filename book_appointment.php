@@ -1,16 +1,9 @@
 <?php
-$host = 'localhost';
-$db = 'test3';
-$user = 'root';
-$pass = 'YZ@pqqKfgCUTl&vVh@d&0#4W';
+require_once "mysqli.php";
 
-$conn = new mysqli($host, $user, $pass, $db);
+var_dump($_POST);
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['appointment'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
     $appointmentData = explode(' ', $_POST['appointment']);
     $appointmentDate = $appointmentData[0];
     $appointmentTime = $appointmentData[1];
@@ -21,17 +14,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['appointment'])) {
     } else {
         $startDate = new DateTime('2024-06-10');
     }
-    $endDate = clone $startDate;
+    var_dump($startDate);
+    /*echo $startDate->date;*/
+    
+    /*$endDate = clone $startDate;
     $endDate->modify('+5 days');
     $interval = new DateInterval('P1D');
     $dateRange = new DatePeriod($startDate, $interval, $endDate->add($interval));
 
-    $stmt = $conn->prepare("INSERT INTO agenda (date, heure_debut) VALUES (?, ?)");
+    $stmt = $connexion->prepare("INSERT INTO agenda (date, heure_debut) VALUES (?, ?)");
     $stmt->bind_param("ss", $appointmentDate, $appointmentTime);
+
+    $result = $stmt->get_result();
+    return $result->num_rows > 0;
+    // var_dump($result->num_rows);
 
     if ($stmt->execute()) {
         echo "Appointment booked successfully!";
     } else {
         echo "Error: " . $stmt->error;
-    }
+    }*/
 }

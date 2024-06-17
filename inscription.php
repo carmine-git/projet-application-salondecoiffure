@@ -36,6 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Erreur lors de la création de l'utilisateur : " . $e->getMessage();
     };
 } else {
-    header("Location: acceuil.html");
+    header("Location: login.html");
     exit;
 };
