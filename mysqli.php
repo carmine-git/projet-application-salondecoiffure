@@ -1,8 +1,8 @@
 <?php
 $hostname = "localhost";
-$database = "test3";
+$database = "serveur_database";
 $username = 'root';
-$password = "YZ@pqqKfgCUTl&vVh@d&0#4W";
+$password = "V!nc3nt/3t/s0n/C0mpt3@MySQL";
 $port = 3306;
 
 try {
