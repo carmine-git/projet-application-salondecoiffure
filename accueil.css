@@ -1,0 +1,21 @@
+body {
+    font-family: "Roboto", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(to right,black, grey);
+    color: #fff;
+}
+
+ul{
+    position: absolute;
+    margin: 150px;
+}
+
+img{
+    position: left;
+}
+
+
