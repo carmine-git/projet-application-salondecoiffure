@@ -1,11 +1,13 @@
 <?php
-require_once "mysqli.php";
+// Inclure le fichier d'initialisation de la connexion à la base de données
+require_once('mysqli.php');
 
 if (isset($_POST['weekStart'])) {
     $startDate = new DateTime($_POST['weekStart']);
 } else {
     $startDate = new DateTime('2024-06-10');
 }
+
 $endDate = clone $startDate;
 $endDate->modify('+5 days');
 $interval = new DateInterval('P1D');
@@ -13,7 +15,7 @@ $dateRange = new DatePeriod($startDate, $interval, $endDate->add($interval));
 
 function isSlotBusy($date, $time, $connexion)
 {
-    $stmt = $connexion->prepare("SELECT * FROM agenda WHERE date = ? AND heure_debut = ?");
+    $stmt = $connexion->prepare("SELECT * FROM agenda_new WHERE date = ? AND heure_debut = ?");
     $stmt->bind_param("ss", $date, $time);
     $stmt->execute();
     $result = $stmt->get_result();
