@@ -13,12 +13,19 @@
     />
     <title>Créer un utilisateur</title>
     <link rel="stylesheet" href="inscription.css" />
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   </head>
 
   <body>
+    <script type="text/javascript">
+      function onSubmit(token) {
+        alert("callback is working");
+        document.getElementById("inscription-form").submit();
+      }
+    </script>
     <div class="container">
       <h1>Créer un utilisateur</h1>
-      <form action="inscription.php" method="post">
+      <form id="inscription-form" action="inscription.php" method="post">
         <label for="nom">Nom</label>
         <input type="text" id="nom" name="nom" required />
 
@@ -53,8 +60,12 @@
             données confidentielles</label
           >
         </div>
-
-        <input type="submit" value="Je m'inscris" />
+        <div
+          class="g-recaptcha"
+          data-sitekey="6LfnPPcpAAAAACKtAOIRwpHz6vy_3gYevlL5bR9m"
+        ></div>
+        <br />
+        <input type="submit" value="Submit" />
       </form>
     </div>
 
