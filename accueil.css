@@ -1,21 +1,41 @@
 body {
     font-family: "Roboto", sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+    height: 100%;
+    width: 100%;
     background: linear-gradient(to right,black, grey);
     color: #fff;
 }
-
-ul{
-    position: absolute;
-    margin: 150px;
+h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-img{
-    position: left;
+.footer-container {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    margin: 50px 0 0 0;
+    border: solid black 20px;
+    border-radius: 10px 10px 10px 10px;
 }
+
+footer {
+    height: 50px;
+    width: 50px;
+    margin: 0 0 0 50px;
+}
+
+.li-contact {
+    font-weight: bold;
+    font-size: larger;
+}
+
+
 
 
