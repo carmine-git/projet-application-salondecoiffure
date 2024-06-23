@@ -15,7 +15,7 @@ $dateRange = new DatePeriod($startDate, $interval, $endDate->add($interval));
 
 function isSlotBusy($date, $time, $connexion)
 {
-    $stmt = $connexion->prepare("SELECT * FROM agenda_new WHERE date = ? AND heure_debut = ?");
+    $stmt = $connexion->prepare("SELECT * FROM agenda WHERE date = ? AND heure_debut = ?");
     $stmt->bind_param("ss", $date, $time);
     $stmt->execute();
     $result = $stmt->get_result();

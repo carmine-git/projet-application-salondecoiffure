@@ -1,4 +1,5 @@
-<?php
+<?php session_start();
+
 require_once "mysqli.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -14,6 +15,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         $res = $st->get_result();
         $row = mysqli_fetch_row($res);
+        $name = $row[1] ?? "";
+        $firstName = $row[2] ?? "";
         $hash = $row[4] ?? false;
         $connexion->close();
     } catch (mysqli_sql_exception $e) {
@@ -22,7 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if ($mdp === $hash) {
-        header("Location: calendar.php");
+        $_SESSION['nom'] = $name;
+        $_SESSION['prenom'] = $firstName;
+        header("Location: accueil.php");
     } else {
         echo 'Incorrect Password!';
     }

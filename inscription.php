@@ -46,6 +46,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION['email'] = $email;
     $_SESSION['nom'] = $nom;
     $_SESSION['prenom'] = $prenom;
+
+    header("location: login.html");
 } else {
     header("Location: login.html");
     exit;

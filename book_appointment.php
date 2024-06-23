@@ -2,7 +2,7 @@
 // Inclure le fichier d'initialisation de la connexion à la base de données
 require_once('mysqli.php');
 
-session_start ();
+session_start();
 
 // Créer un objet DateTime avec la date actuelle
 $currentDate = new DateTime();
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     echo "<h2><br>StarDate_Debug<br/><p></h2>";
     var_dump($startDate);
-    
+
     // Pour afficher la date dans le format 'Y-m-d' (année-mois-jour)
     echo "<h2><br>StarDate dans le format Y-m-d<br/><p></h2>";
     echo $startDate->format('Y-m-d'); // Affiche par exemple : 2023-06-19
@@ -40,13 +40,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Pour afficher la date et l'heure dans le format 'd-m-Y H:i:s' (jour-mois-année heure:minute:seconde)
     echo "<h2><br>StarDate dans le format d-m-Y H:i:s<br/><p></h2>";
     echo $startDate->format('d-m-Y H:i:s'); // Affiche par exemple : 19-06-2023 00:00:00
-        
+
     $endDate = clone $startDate;
     $endDate->modify('+5 days');
     $interval = new DateInterval('P1D');
     $dateRange = new DatePeriod($startDate, $interval, $endDate);
 
-    $stmt = $connexion->prepare("INSERT INTO agenda_new (date, heure_debut) VALUES (?, ?)");
+    $stmt = $connexion->prepare("INSERT INTO agenda (date, heure_debut) VALUES (?, ?)");
     // $stmt = $connexion->prepare("INSERT INTO agenda (date, heure_debut, id_client) VALUES (?, ?, ?)");
     if (!$stmt) {
         die("Prepare failed: " . $connexion->error);
@@ -78,6 +78,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $stmt->close();
     $connexion->close();
-
-    
 }
