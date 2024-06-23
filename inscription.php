@@ -1,6 +1,13 @@
 <?php
 require_once "mysqli.php";
 
+session_start();
+
+if (isset($_SESSION['user_id'])) {
+    header('location: acceuil.html');
+    exit;
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
@@ -35,6 +42,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } catch (mysqli_sql_exception $e) {
         echo "Erreur lors de la création de l'utilisateur : " . $e->getMessage();
     };
+
+    $_SESSION['email'] = $email;
+    $_SESSION['nom'] = $nom;
+    $_SESSION['prenom'] = $prenom;
 } else {
     header("Location: login.html");
     exit;
