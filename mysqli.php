@@ -1,8 +1,10 @@
 <?php
-$hostname = "localhost";
-$database = "serveur_database";
-$username = 'root';
-$password = "V!nc3nt/3t/s0n/C0mpt3@MySQL";
+// Merci de changer les données qui correspondent à votre environnement
+
+$hostname = "";
+$database = "";
+$username = '';
+$password = "";
 $port = 3306;
 
 try {
