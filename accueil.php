@@ -16,7 +16,7 @@
   {
     $user = "";
 
-    if (!isset($_SESSION['email']) && !isset($_SESSION['nom'])) {
+    if (!isset($_SESSION['prenom']) && !isset($_SESSION['nom'])) {
       $user = "guest";
       return $user;
     }
@@ -24,7 +24,6 @@
     $user = array(
       "nom" => $_SESSION['nom'],
       "prenom" => $_SESSION['prenom'],
-      "email" => $_SESSION['email']
     );
 
     return $user;
@@ -32,7 +31,7 @@
   ?>
 
   <div class="navbar">
-    <h1>Bienvenu sur le site <?php echo getUserCredentials()['nom'] ?>, <?php echo getUserCredentials()['prenom'] ?></h1>
+    <h1>Bienvenue sur le site <?php echo getUserCredentials()['nom'] ?? "invité" ?>, <?php echo getUserCredentials()['prenom'] ?? "" ?></h1>
 
     <a href="login.html"><button class="button" id="connexion" name="connexion">
         Se connecter
