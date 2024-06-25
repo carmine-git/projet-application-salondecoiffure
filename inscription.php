@@ -2,11 +2,8 @@
 require_once "mysqli.php";
 
 session_start();
-
-if (isset($_SESSION['user_id'])) {
-    header('location: acceuil.html');
-    exit;
-}
+session_regenerate_id(true);
+$session_id = session_id();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nom = $_POST['nom'];
@@ -35,10 +32,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $hashedPassword = hash('sha256', $mdp);
 
     try {
-        $query = "INSERT INTO comptes_client (nom, prenom, email, mdp) VALUES (?, ?, ?, ?)";
+        $query = "INSERT INTO comptes_client (nom, prenom, email, mdp, session_id) VALUES (?, ?, ?, ?, ?)";
         $st = $connexion->prepare($query);
-        $st->bind_param("ssss", $nom, $prenom, $email, $hashedPassword);
+        $st->bind_param("sssss", $nom, $prenom, $email, $hashedPassword, $session_id);
         $st->execute();
+        $st->close();
     } catch (mysqli_sql_exception $e) {
         echo "Erreur lors de la création de l'utilisateur : " . $e->getMessage();
     };
@@ -46,6 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION['email'] = $email;
     $_SESSION['nom'] = $nom;
     $_SESSION['prenom'] = $prenom;
+    $connexion->close();
 
     header("location: login.html");
 } else {

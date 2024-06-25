@@ -32,6 +32,7 @@
 
   <div class="navbar">
     <h1>Bienvenue sur le site <?php echo getUserCredentials()['nom'] ?? "invité" ?>, <?php echo getUserCredentials()['prenom'] ?? "" ?></h1>
+    <h1>Session ID: <?php echo session_id(); ?></h1>
 
     <a href="login.html"><button class="button" id="connexion" name="connexion">
         Se connecter
@@ -55,9 +56,9 @@
     <footer>
       <ul>
         <li class="li-contact">Contact</li>
-        <li>adresse :</li>
-        <li>téléphone :</li>
-        <li>e-mail :</li>
+        <li>adresse</li>
+        <li>téléphone</li>
+        <li>e-mail</li>
       </ul>
     </footer>
   </div>
