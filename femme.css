@@ -1,0 +1,37 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(to right, black, grey, white);
+    color: white;
+}
+
+.titre{
+    background: linear-gradient(to right, black, grey, grey, black);
+    color: goldenrod;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sous-titre{
+    color: black;
+    background: linear-gradient(to right, grey, grey, white);
+}
+
+.prix{
+    color: black;
+    background: linear-gradient(to right, grey, grey, white);
+
+}
+
+.coupe{
+    cursor: pointer;
+}
+
+.couleur{
+    cursor: pointer;
+}
+
+.confirm-button{
+    cursor: pointer;
+    height: 50px;
+}

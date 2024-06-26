@@ -66,3 +66,11 @@ ul {
   width: 150px;
   height: 150px;
 }
+
+div table {
+  font-size: 16;
+  height: 15rem;
+  width: 15rem;
+  margin: 20px;
+  text-align: center;
+}

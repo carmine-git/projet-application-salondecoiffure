@@ -8,16 +8,14 @@ require_once('mysqli.php');
 $currentDate = new DateTime();
 $currentDate = $currentDate->format('Y-m-d');
 
-$id_client = session_id();
+$client_id = $_SESSION['client_id'];
 $id_employé = 2;
 
 echo "<h2><br>Date_du_jour</br><p></h2>";
 echo $currentDate;
 
-echo "<h2><br>$_POST</br><p></h2>";
-var_dump($_POST);
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['appointment'])) {
+    var_dump($_POST);
     $appointmentData = explode(' ', $_POST['appointment']);
     $appointmentDate = $appointmentData[0];
     $appointmentTime = $appointmentData[1];
@@ -90,31 +88,30 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Version 3 : 6 champs insérés
     // Code pour bloquer tout un seul créneau
-    $stmt = $connexion->prepare("INSERT INTO agenda (date, heure_debut, heure_fin, date_de_creation, id_client, id_employé) VALUES (?, ?, ?, ?, ? ,?)");
-    if (!$stmt) {
-        die("Prepare failed: " . $connexion->error);
-    }
 
-    $stmt->bind_param("sssssi", $appointmentDate, $appointmentTime, $appointmentTimeFin, $currentDate, $id_client, $id_employé);
-
-    if ($stmt->execute()) {
+    try {
+        $query = "INSERT INTO agenda (date, heure_debut, heure_fin, date_de_creation, client_id, id_employé) VALUES (?, ?, ?, ?, ? ,?)";
+        $st = $connexion->prepare($query);
+        $st->bind_param("sssssi", $appointmentDate, $appointmentTime, $appointmentTimeFin, $currentDate, $client_id, $id_employé);
+        $st->execute();
         echo "Appointment for " . $appointmentDate . " booked successfully!<br>";
-    } else {
-        echo "Error: " . $stmt->error . "<br>";
+        $st->close();
+        $connexion->close();
+    } catch (Error $e) {
+        echo "Prepare failed: " . $connexion->error;
     }
 
     // Code pour bloquer tout un créneau
-    /*foreach ($dateRange as $date) {
-        $appointmentDate = $date->format('Y-m-d');
-        $stmt->bind_param("ss", $appointmentDate, $appointmentTime);
+    // foreach ($dateRange as $date) {
+    //     $appointmentDate = $date->format('Y-m-d');
+    //     $stmt->bind_param("ss", $appointmentDate, $appointmentTime);
 
-        if ($stmt->execute()) {
-            echo "Appointment for " . $appointmentDate . " booked successfully!<br>";
-        } else {
-            echo "Error: " . $stmt->error . "<br>";
-        }
-    }*/
+    //     if ($stmt->execute()) {
+    //         echo "Appointment for " . $appointmentDate . " booked successfully!<br>";
+    //     } else {
+    //         echo "Error: " . $stmt->error . "<br>";
+    //     }
+    // }
 
-    $stmt->close();
-    $connexion->close();
+
 }

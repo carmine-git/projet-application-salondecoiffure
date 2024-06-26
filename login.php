@@ -9,6 +9,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $mdp = hash('sha256', $_POST['mdp']);
 
+    // Gestion du timeout de la session de l'utilisateur
+    $_SESSION['start'] = time();
+
     $query = "SELECT * FROM comptes_client WHERE email = ?";
     $st = $connexion->prepare($query);
     $st->bind_param("s", $email);
@@ -17,6 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         $res = $st->get_result();
         $row = mysqli_fetch_row($res);
+        $client_id = $row[0];
         $name = $row[1] ?? "";
         $firstName = $row[2] ?? "";
         $hash = $row[4] ?? false;
@@ -29,7 +33,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($mdp === $hash) {
         $_SESSION['nom'] = $name;
         $_SESSION['prenom'] = $firstName;
-        header("Location: accueil.php");
+        $_SESSION['client_id'] = $client_id;
+        header('location: accueil.php');
     } else {
         echo 'Incorrect Password!';
     }

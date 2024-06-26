@@ -1,4 +1,53 @@
-<?php session_start(); ?>
+<?php
+session_start();
+include_once('mysqli.php');
+
+function getUserCredentials()
+{
+  $user = "";
+
+  if (!isset($_SESSION['prenom']) && !isset($_SESSION['nom'])) {
+    $user = "guest";
+    return $user;
+  }
+
+  $user = array(
+    "nom" => $_SESSION['nom'],
+    "prenom" => $_SESSION['prenom'],
+  );
+
+  return $user;
+}
+
+function getAppointmentDatas($user_id, $connexion)
+{
+  try {
+    $query = "SELECT date, heure_debut FROM agenda WHERE client_id = ?";
+    $st = $connexion->prepare($query);
+    $st->bind_param('s', $user_id);
+    $st->execute();
+    $res = $st->get_result();
+    $rows = resultToArray($res);
+    $res->free();
+    return $rows;
+  } catch (Error $e) {
+    echo $e;
+    exit;
+  } finally {
+    $st->close();
+    $connexion->close();
+  }
+}
+
+function resultToArray($result)
+{
+  $rows = array();
+  while ($row = $result->fetch_assoc()) {
+    $rows[] = $row;
+  }
+  return $rows;
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,27 +61,17 @@
 
 <body>
   <?php
-  function getUserCredentials()
-  {
-    $user = "";
 
-    if (!isset($_SESSION['prenom']) && !isset($_SESSION['nom'])) {
-      $user = "guest";
-      return $user;
-    }
+  if (isset($_SESSION['start']) && (time() - $_SESSION['start'] > 120)) {
+    session_unset();
+    session_destroy();
+    header("location: login.html");
+  };
 
-    $user = array(
-      "nom" => $_SESSION['nom'],
-      "prenom" => $_SESSION['prenom'],
-    );
-
-    return $user;
-  }
+  $_SESSION['start'] = time();
   ?>
-
   <div class="navbar">
     <h1>Bienvenue sur le site <?php echo getUserCredentials()['nom'] ?? "invité" ?>, <?php echo getUserCredentials()['prenom'] ?? "" ?></h1>
-    <h1>Session ID: <?php echo session_id(); ?></h1>
 
     <a href="login.html"><button class="button" id="connexion" name="connexion">
         Se connecter
@@ -49,6 +88,32 @@
         Se déconnecter
       </button>
     </a>
+  </div>
+
+  <div class="appointments">
+    <?php
+    if (isset($_SESSION['client_id'])) {
+      echo '<h2>Mes rendez-vous</h2>';
+
+      $data = getAppointmentDatas($_SESSION['client_id'], $connexion);
+
+      if (count($data) > 0) {
+        echo '<table border="1">';
+        echo '<tr><th>Date</th><th>Horaire</th></tr>';
+
+        foreach ($data as $row) {
+          echo '<tr>';
+          echo '<td>' . htmlspecialchars($row['date']) . '</td>';
+          echo '<td>' . htmlspecialchars($row['heure_debut']) . '</td>';
+          echo '</tr>';
+        }
+
+        echo '</table>';
+      } else {
+        echo "Pas de rendez-vous confirmé pour le moment";
+      }
+    }
+    ?>
   </div>
 
   <div class="footer-container">

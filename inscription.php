@@ -3,7 +3,10 @@ require_once "mysqli.php";
 
 session_start();
 session_regenerate_id(true);
+
 $session_id = session_id();
+$user_id = uniqid();
+$accountCreationDate = date('d/m/Y H:i');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nom = $_POST['nom'];
@@ -12,29 +15,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mdp = $_POST['mdp'];
     $confirmemdp = $_POST['confirmemdp'];
 
-    // Nous nous assurons que la tables des comptes client est crée même la base de donnée est nouvelle
-    $clientAccountTableExists = $connexion->prepare("SELECT 1 FROM comptes_client LIMIT 1");
-    if ($clientAccountTableExists !== 1) {
-        $connexion->prepare("CREATE TABLE `comptes_client` (
-            `client_id` int NOT NULL,
-            `nom` varchar(32) NOT NULL,
-            `prenom` varchar(32) NOT NULL,
-            `email` varchar(100) NOT NULL,
-            `mdp` varchar(255) NOT NULL,
-            `date_inscription` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-            )");
-    };
-
     if ($mdp !== $confirmemdp) {
         echo "les mots de passe ne correspondent pas";
     }
 
-    $hashedPassword = hash('sha256', $mdp);
+    $mdp = hash('sha256', $mdp);
 
     try {
-        $query = "INSERT INTO comptes_client (nom, prenom, email, mdp, session_id) VALUES (?, ?, ?, ?, ?)";
+        $query = "INSERT INTO comptes_client (
+                    client_id, 
+                    nom, 
+                    prenom, 
+                    email, 
+                    mdp,
+                    date_inscription, 
+                    session_id
+                ) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $st = $connexion->prepare($query);
-        $st->bind_param("sssss", $nom, $prenom, $email, $hashedPassword, $session_id);
+        $st->bind_param("sssssss", $user_id, $nom, $prenom, $email, $mdp, $accountCreationDate, $session_id);
         $st->execute();
         $st->close();
     } catch (mysqli_sql_exception $e) {
@@ -42,11 +40,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     };
 
     $_SESSION['email'] = $email;
-    $_SESSION['nom'] = $nom;
+    $_SESSION['user_id'] = $user_id;
     $_SESSION['prenom'] = $prenom;
     $connexion->close();
 
-    header("location: login.html");
+    header('location: login.html');
 } else {
     header("Location: login.html");
     exit;
