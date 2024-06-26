@@ -56,7 +56,11 @@ function isSlotBusy($date, $time, $connexion)
                                     <?php if (isSlotBusy($date->format('Y-m-d'), $time, $connexion)) : ?>
                                         <button type="button" class="slot busy" disabled>Occupé</button>
                                     <?php else : ?>
-                                        <button type="submit" name="appointment" value="<?php echo $date->format('Y-m-d') . ' ' . $time; ?>" class="slot available"><?php echo $hour . ':00'; ?></button>
+                                        <a href="sexe.html">
+                                            <button type="submit" name="appointment" value="<?php echo $date->format('Y-m-d') . ' ' . $time; ?>" class="slot available">
+                                                <?php echo $hour . ':00'; ?>
+                                            </button>
+                                        </a>
                                     <?php endif; ?>
                                 </div>
                             <?php endfor; ?>
