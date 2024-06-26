@@ -1,0 +1,76 @@
+body {
+  font-family: "Roboto", sans-serif;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to right, black, grey);
+  color: #fff;
+}
+
+a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar {
+  background-color: #333;
+  overflow: hidden;
+}
+
+.navbar a {
+  color: white;
+  font-size: 16px;
+  padding: 15px 15px;
+  text-decoration: none;
+  text-align: center;
+  float: left;
+}
+
+.navbar button {
+  color: rgb(0, 0, 0);
+  height: 50px;
+  width: 200px;
+  font-size: large;
+  background-color: white;
+  text-decoration: none;
+  border: solid white 3px;
+  border-radius: 5px 5px 5px 5px;
+}
+
+.navbar button:hover {
+  color: rgb(255, 255, 255);
+  background-color: rgb(51, 51, 51);
+  transition: 0.3s;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  margin: 50px 0 0 0;
+}
+
+footer {
+  height: 50px;
+  width: 50px;
+  margin: 0 0 0 50px;
+}
+
+.li-contact {
+  font-weight: bold;
+  font-size: larger;
+  margin: 0px 0px 15px 0;
+}
+
+ul {
+  width: 150px;
+  height: 150px;
+}
+
+div table {
+  font-size: 16;
+  height: 15rem;
+  width: 15rem;
+  margin: 20px;
+  text-align: center;
+}

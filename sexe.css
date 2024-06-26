@@ -1,0 +1,51 @@
+body{
+    font-family: "Roboto", sans-serif;
+    background: linear-gradient(to right, white, grey, white);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1500px;
+    height: 800px;
+    margin: 0;
+}
+
+.titre{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: lightgrey;
+    text-decoration: underline;
+    background: linear-gradient(to right, grey, black, grey);
+    border: solid black 10px;
+}
+
+.button-2{
+    position: absolute;
+    right: 700px;
+    border: solid black 5px;
+    cursor: pointer;
+    background-color: black;
+    color: goldenrod;
+    transition: background-color 0.3s ease;
+}
+
+.button-2:hover{
+    background-color: white;
+    color: black;
+}
+
+.button-1{
+    position: absolute;
+    left: 620px;
+    border: solid black 5px;
+    cursor: pointer;
+    background-color: black;
+    color: goldenrod;
+    transition: background-color 0.3s ease;
+}
+
+.button-1:hover{
+    background-color: white;
+    color: black;
+}
