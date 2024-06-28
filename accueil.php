@@ -19,12 +19,13 @@ function getUserCredentials()
   return $user;
 }
 
-function getAppointmentDatas($user_id, $connexion)
+function getAppointmentDatas($connexion)
 {
   try {
-    $query = "SELECT date, heure_debut FROM agenda WHERE client_id = ?";
+    $query = "SELECT * FROM agenda
+              INNER JOIN coiffures_client
+              ON coiffures_client.id_rdv = agenda.id_rdv";
     $st = $connexion->prepare($query);
-    $st->bind_param('s', $user_id);
     $st->execute();
     $res = $st->get_result();
     $rows = resultToArray($res);
@@ -95,16 +96,18 @@ function resultToArray($result)
     if (isset($_SESSION['client_id'])) {
       echo '<h2>Mes rendez-vous</h2>';
 
-      $data = getAppointmentDatas($_SESSION['client_id'], $connexion);
+      $data = getAppointmentDatas($connexion);
 
       if (count($data) > 0) {
         echo '<table border="1">';
-        echo '<tr><th>Date</th><th>Horaire</th></tr>';
+        echo '<tr><th>Date</th><th>Horaire</th><th>coupe</th><th>prix</th></tr>';
 
         foreach ($data as $row) {
           echo '<tr>';
           echo '<td>' . htmlspecialchars($row['date']) . '</td>';
           echo '<td>' . htmlspecialchars($row['heure_debut']) . '</td>';
+          echo '<td>' . htmlspecialchars($row['coupe']) . '</td>';
+          echo '<td>' . htmlspecialchars($row['prix']) . '</td>';
           echo '</tr>';
         }
 
