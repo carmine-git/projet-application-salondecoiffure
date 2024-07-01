@@ -104,8 +104,8 @@ function resultToArray($result)
 
         foreach ($data as $row) {
           echo '<tr>';
-          echo '<td>' . htmlspecialchars($row['date']) . '</td>';
-          echo '<td>' . htmlspecialchars($row['heure_debut']) . '</td>';
+          echo '<td>' . htmlspecialchars($row['date_rdv']) . '</td>';
+          echo '<td>' . htmlspecialchars($row['heure_rdv']) . '</td>';
           echo '<td>' . htmlspecialchars($row['coupe']) . '</td>';
           echo '<td>' . htmlspecialchars($row['prix']) . '</td>';
           echo '</tr>';

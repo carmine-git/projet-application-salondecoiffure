@@ -9,8 +9,32 @@
 </head>
 
 <body>
-    <form action="homme.php" method="post">
+    <form action="homme_form.php" method="post">
         <h1 class="titre">Choix de la prestation :</h1>
+        <?php
+        session_start();
+
+        $feature_prices = array(
+            "coupe" => array(
+                "degrade" => 6,
+                "mi-long" => 8,
+                "long" => 10,
+                "mi-court" => 12,
+                "court" => 14,
+            ),
+            "couleur" => array(
+                "brun" => 6,
+                "blond" => 8,
+                "chatain" => 10,
+                "roux" => 12,
+                "noir" => 14,
+            )
+
+        );
+
+        $_SESSION['prestations'] = $feature_prices;
+        ?>
+
         <div class="container">
             <fieldset>
                 <legend>Choisissez votre coupe</legend>
@@ -35,7 +59,7 @@
                     <label for="mi-court">Mi-Court</label>
                 </div>
                 <div>
-                    <input type="radio" id="court" name="coupe" value="court" checked />
+                    <input type="radio" id="court" name="coupe" value="mi-court" checked />
                     <label for="court">Court</label>
                 </div>
             </fieldset>
@@ -56,7 +80,7 @@
                 </div>
                 <div>
                     <input type="radio" id="chatain" name="couleur" value="chatain" checked />
-                    <label for="chatain">Châtain</label>
+                    <label for="chatain">chatain</label>
                 </div>
                 <div>
                     <input type="radio" id="roux" name="couleur" value="roux" checked />
@@ -67,24 +91,9 @@
                     <label for="noir">Noir</label>
                 </div>
             </fieldset>
-            <!-- <h3 class="sous-titre">Couleur :</h3>
-                <select class="couleur">
-                    <option>Aucun</option>
-                    <option>Brun</option>
-                    <option>Blond</option>
-                    <option>Châtain</option>
-                    <option>Roux</option>
-                    <option>Noir</option>
-                </select> -->
+
         </div><br><br><br>
         <h3 class="prix">Prix de la prestation :</h3>
-        <!-- faire le script pour le calcul du prix de la prestation
-                <div>
-                    <script>
-
-                    </script>
-                </div>
-            -->
         <input type="submit" class="confirm-button"></input>
     </form>
 </body>

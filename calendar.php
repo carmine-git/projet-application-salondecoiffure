@@ -92,6 +92,7 @@
     <h1>Calendrier Hebdomadaire</h1>
     <div class="calendar-container">
         <?php
+        session_start();
         require_once('mysqli.php');
 
         if ($connexion->connect_error) {
@@ -104,15 +105,15 @@
         function getBookings($conn)
         {
             $bookings = [];
-            $sql = "SELECT date, heure_debut, client_id FROM agenda WHERE etat = 'confirmé'";
+            $sql = "SELECT date_rdv, heure_rdv, client_id FROM agenda WHERE etat = 'confirmé'";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    $date = str_replace('-', '', $row['date']);
-                    $time = substr($row['heure_debut'], 0, 5);
+                    $date = str_replace('-', '', $row['date_rdv']);
+                    $time = substr($row['heure_rdv'], 0, 5);
                     $slotId = $date . '_' . $time;
-                    $bookings[$slotId] = 'Réservé par ' . $row['client_id'];
+                    $bookings[$slotId] = 'Réservé';
                 }
             }
 
@@ -189,7 +190,6 @@
             echo "</div>";
         }
 
-        // Example usage:
         $year = isset($_GET['year']) ? $_GET['year'] : 2024;
         $week = isset($_GET['week']) ? $_GET['week'] : 26;
 

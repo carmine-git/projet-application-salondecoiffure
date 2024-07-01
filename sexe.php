@@ -12,17 +12,30 @@
     <div>
         <?php
         session_start();
+        require_once('mysqli.php');
 
-        var_dump($_GET);
+        $date_rdv = $_GET['date'];
+        $time_rdv = $_GET['time'];
+        $id_employé = 2;
 
-        $_SESSION['date'] = $_GET['date'];
-        $_SESSION['time'] = $_GET['time'];
+        try {
+            $query = "INSERT INTO agenda (date_rdv, heure_rdv, client_id, id_employé) VALUES (?, ?, ? ,?)";
+            $st = $connexion->prepare($query);
+            $st->bind_param("sssi", $date_rdv, $time_rdv, $_SESSION['client_id'], $id_employé);
+            $st->execute();
+            $st->close();
+            $connexion->close();
+        } catch (Error $e) {
+            echo "Prepare failed: " . $connexion->error;
+        }
 
-        var_dump($_SESSION);
+        $_SESSION['date'] = $date_rdv;
+        $_SESSION['time'] = $time_rdv;
+
         ?>
         <h1 class="titre">Choisir votre sexe</h1><br>
-        <a href="homme.html"><button class="button-1" id="sexe-homme" name="sexe-homme"> Homme </button></a>
-        <a href="femme.html"><button class="button-2" id="sexe-femme" name="sexe-femme"> Femme </button></a>
+        <a href="homme.php"><button class="button-1" id="sexe-homme" name="sexe-homme"> Homme </button></a>
+        <a href="femme.php"><button class="button-2" id="sexe-femme" name="sexe-femme"> Femme </button></a>
     </div>
 </body>
 

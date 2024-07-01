@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 require_once './stripe/init.php';
 
 $stripeSecretKey = 'sk_test_51PVaZSEtFZQG5tspSL7h39JqUh7JpufhUiorLRIfm8a4Vk5s5RzE3N6KAo6wI2q0n59QOFp4WGtiIE8oSFXswZ7Q00pYjAjS8v';
@@ -13,9 +14,9 @@ $checkoutSesison = \Stripe\Checkout\Session::create([
             "quantity" => 1,
             "price_data" => [
                 "currency" => "eur",
-                "unit_amount" => 2000,
+                "unit_amount" => $_SESSION['prestations_client']['prix_tot'] * 100,
                 "product_data" => [
-                    "name" => "coupe",
+                    "name" => $_SESSION['prestations_client']['coupe_client'],
                 ]
             ]
         ]
